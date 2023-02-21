@@ -8,6 +8,8 @@ security:
         app_user_provider:
             id: App\Security\UserProvider
         # used to reload user from session & other features (e.g. switch_user)
+        custom_user_provider:
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -18,6 +20,8 @@ security:
             form_login:
                 login_path: login_usuarios
                 check_path: login_usuarios
+            custom_authenticators:
+                - App\Security\Autenticar
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
