@@ -27,47 +27,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-md-8 col-lg-8">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h4>Hoja de vida</h4>
-                    <i class="bi bi-three-dots-vertical"></i>
-                </div>
-                <div class="card-body px-4 py-2-5">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-12 col-xl-12 col-xxl-5">
-                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                <img src="https://img.freepik.com/vector-gratis/ilustracion-concepto-imagenes_114360-298.jpg?w=826&t=st=1677969153~exp=1677969753~hmac=cf6dbf0cf48032d55ecf8a26cff2cafd336201ea186d077bd43bb3dd55b6d771  "
-                                     class="img-thumbnail"
-                                     alt="">
-                                <p class="mt-3 mb-0"
-                                   style="font-size: 28px; font-weight: bold">{{ arPerfil.nombre1 }} {{ arPerfil.nombre2 }}</p>
-                                <p class=" m-0"
-                                   style="font-size: 24px; ">{{ arPerfil.apellido1 }} {{ arPerfil.apellido2 }}</p>
-                            </div>
-
-
-                            <h6 class="text-muted font-extrabold mt-3"><i
-                                        class="bi bi-calendar-date"></i> {{ "now"|date("d-m-Y") }}</h6>
-
-                            <h6 class="text-muted font-extrabold"><i class="bi bi-envelope-fill"></i> Correo</h6>
-
-                            <h6 class="text-muted font-extrabold">Habilidades</h6>
-
-                        </div>
-                        <div class="col-md-9 col-lg-12 col-xl-12 col-xxl-7">
-                            <h6 class="text-muted font-extrabold">Experiencia laboral</h6>
-
-                            <h6 class="text-muted font-extrabold">Estudios</h6>
-
-
-                            <h6 class="font-semibold mb-0">112.000</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ include('componentes/HojaVida.html.twig', {arPerfil: arPerfil}) }}
     </section>
 
 {% endblock %}
