@@ -2,18 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\ExperienciaProfesional;
 use App\Entity\Perfil;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Perfil>
- *
- * @method Perfil|null find($id, $lockMode = null, $lockVersion = null)
- * @method Perfil|null findOneBy(array $criteria, array $orderBy = null)
- * @method Perfil[]    findAll()
- * @method Perfil[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class PerfilRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,46 +14,28 @@ class PerfilRepository extends ServiceEntityRepository
         parent::__construct($registry, Perfil::class);
     }
 
-    public function save(Perfil $entity, bool $flush = false): void
+    public function hojaVida($codigoUsuario)
     {
-        $this->getEntityManager()->persist($entity);
+        $arPerfil = $this->createQueryBuilder('e')
+            ->select('e.id')
+            ->addSelect('e.nombre1')
+            ->addSelect('e.nombre2')
+            ->addSelect('e.apellido1')
+            ->addSelect('e.apellido2')
+            ->addSelect('e.correo')
+            ->orderBy('e.id', 'ASC')
+            ->where("e.id = {$codigoUsuario}")
+            ->getQuery()
+            ->getSingleResult();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+
+        $arExperienciaProfecionales = $this->_em->getRepository(ExperienciaProfesional::class)->lista();
+
+        return (object)[
+            'arPerfil' => (object)$arPerfil,
+            'arExperienciaProfecionales' => $arExperienciaProfecionales
+        ];
+
+
     }
-
-    public function remove(Perfil $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-//    /**
-//     * @return Perfil[] Returns an array of Perfil objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Perfil
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

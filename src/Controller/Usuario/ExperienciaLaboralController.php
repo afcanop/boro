@@ -27,14 +27,13 @@ class ExperienciaLaboralController extends AbstractController
                 $em->getRepository(ExperienciaProfesional::class)->eliminar($codigo);
             }
         }
-        $arPerfil = $em->getRepository(Perfil::class)->find(1);
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
         $arExperienciaProfecionales = $em->getRepository(ExperienciaProfesional::class)->Lista();
 
         return $this->render('usuario/experiencialaboral/lista.html.twig', [
-            'arPerfil' => $arPerfil,
-            'arExperienciaProfecionales' => $arExperienciaProfecionales,
+            'arHojaVida' => $arHojaVida,
             'form' => $form->createView(),
-
+            'arExperienciaProfecionales' => $arExperienciaProfecionales,
         ]);
     }
 
@@ -54,10 +53,12 @@ class ExperienciaLaboralController extends AbstractController
                 return $this->redirect($this->generateUrl('usuario_perfil_experiencia_laboral_lista'));
             }
         }
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
 
         return $this->render('usuario/experiencialaboral/nuevo.html.twig', [
             'form' => $form->createView(),
-            'arPerfil' => $arPerfil
+            'arHojaVida' => $arHojaVida,
+
         ]);
     }
 }

@@ -27,9 +27,11 @@ class PerfilController extends AbstractController
             }
         }
 
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
+
         return $this->render('usuario/perfil/index.html.twig', [
             'form' => $form->createView(),
-            'arPerfil' => $arPerfil
+            'arHojaVida' => $arHojaVida
         ]);
     }
 }

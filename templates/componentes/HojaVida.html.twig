@@ -12,41 +12,38 @@
                              class="img-thumbnail"
                              alt="">
                         <p class="mt-3 mb-0"
-                           style="font-size: 28px; font-weight: bold">{{ arPerfil.nombre1 }} {{ arPerfil.nombre2 }}</p>
+                           style="font-size: 28px; font-weight: bold">{{ arHojaVida.arPerfil.nombre1 }} {{ arHojaVida.arPerfil.nombre2 }}</p>
                         <p class=" m-0"
-                           style="font-size: 24px; ">{{ arPerfil.apellido1 }} {{ arPerfil.apellido2 }}</p>
+                           style="font-size: 24px; ">{{ arHojaVida.arPerfil.apellido1 }} {{ arHojaVida.arPerfil.apellido2 }}</p>
                     </div>
 
 
                     <h6 class="text-muted font-extrabold mt-3"><i
                                 class="bi bi-calendar-date"></i> {{ "now"|date("d-m-Y") }}</h6>
 
-                    <h6 class="text-muted font-extrabold"><i class="bi bi-envelope-fill"></i> {{ arPerfil.correo }}</h6>
+                    <h6 class="text-muted font-extrabold"><i
+                                class="bi bi-envelope-fill"></i> {{ arHojaVida.arPerfil.correo }}</h6>
 
                     <h6 class="text-muted font-extrabold">Habilidades</h6>
 
                 </div>
                 <div class="col-md-9 col-lg-12 col-xl-12 col-xxl-7">
-                    {% if arExperienciaProfecionales is defined %}
-                        <h6 class="text-muted font-extrabold">Experiencia laboral</h6>
-                        <table class="table table-hover">
-                            <tbody>
-                            {% for arExperienciaProfecional in arExperienciaProfecionales %}
-                                <tr>
-                                    {{ arExperienciaProfecional.fechaDesde |date("d-m-Y") }} - {{ arExperienciaProfecional.fechaDesde |date("d-m-Y") }}
-                                    <br>
-                                    {{ arExperienciaProfecional.compania}}
-                                    <br>
-                                    {{ arExperienciaProfecional.descripcionCargo}}
-
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-
-                    {% endif %}
-
+                    <h6 class="text-muted font-extrabold">Experiencia laboral</h6>
+                    <table class="table table-hover">
+                        <tbody>
+                        {% for key, arExperienciaProfecional in arHojaVida.arExperienciaProfecionales %}
+                            <tr>
+                                <td>
+                                    <p>{{ arExperienciaProfecional.fechaDesde |date("d-m-Y") }}
+                                    - {{ arExperienciaProfecional.fechaDesde |date("d-m-Y") }}
+                                    </p>
+                                    <p>{{ arExperienciaProfecional.compania }}</p>
+                                    <p class="text-justify">{{ arExperienciaProfecional.descripcionCargo }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                     <h6 class="text-muted font-extrabold">Estudios</h6>
 
 
