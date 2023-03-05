@@ -1,0 +1,12 @@
+.icon {
+    font-size: 2rem;
+    color:  #aeaaaa;
+}
+
+.icon:hover{
+    color:  #435ebe;
+}
+
+.bi-trash3:hover{
+    color: red;
+}

@@ -13,6 +13,9 @@
     <link rel="stylesheet" media="screen, print"
           href="{{ asset('admin/assets/css/shared/iconly.css') }}">
 
+    <link rel="stylesheet" media="screen, print"
+          href="{{ asset('admin/assets/css/custom/general.css') }}">
+
     <link rel="shortcut icon" media="screen, print"
           href="{{ asset('admin/assets/images/logo/favicon.svg') }}" type="image/x-icon">
 
@@ -20,7 +23,6 @@
           href="{{ asset('admin/assets/images/logo/favicon.png') }}" type="image/png">
 
 
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
