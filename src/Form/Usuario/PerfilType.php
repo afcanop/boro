@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Usuario;
 
 use App\Entity\Perfil;
 use Symfony\Component\Form\AbstractType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MiperfilType extends AbstractType
+class PerfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

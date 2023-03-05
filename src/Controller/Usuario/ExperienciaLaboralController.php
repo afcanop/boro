@@ -4,7 +4,7 @@ namespace App\Controller\Usuario;
 
 use App\Entity\ExperienciaProfesional;
 use App\Entity\Perfil;
-use App\Form\MiperfilType;
+use App\Form\PerfilType;
 use App\Form\Usuario\ExperienciaLaboralType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +20,8 @@ class ExperienciaLaboralController extends AbstractController
 
         $arPerfil = $em->getRepository(Perfil::class)->find(1);
         $arExperienciaProfecionales = $em->getRepository(ExperienciaProfesional::class)->Lista();
-        return $this->render('usuario/perfil/experiencialaboral/lista.html.twig', [
+
+        return $this->render('usuario/experiencialaboral/lista.html.twig', [
             'arPerfil' => $arPerfil,
             'arExperienciaProfecionales' => $arExperienciaProfecionales
         ]);
@@ -43,7 +44,7 @@ class ExperienciaLaboralController extends AbstractController
             }
         }
 
-        return $this->render('usuario/perfil/experiencialaboral/nuevo.html.twig', [
+        return $this->render('usuario/experiencialaboral/nuevo.html.twig', [
             'form' => $form->createView(),
             'arPerfil' => $arPerfil
         ]);

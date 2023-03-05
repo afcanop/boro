@@ -3,7 +3,7 @@
 namespace App\Controller\Usuario;
 
 use App\Entity\Perfil;
-use App\Form\MiperfilType;
+use App\Form\Usuario\PerfilType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,18 +17,17 @@ class PerfilController extends AbstractController
     {
         $arPerfil = $em->getRepository(Perfil::class)->find(1);
 
-        $form = $this->createForm(MiperfilType::class, $arPerfil);
+        $form = $this->createForm(PerfilType::class, $arPerfil);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('btnGuardar')->isClicked()) {
                 $arPerfil = $form->getData();
                 $em->persist($arPerfil);
                 $em->flush();
-                //return $this->redirect($this->generateUrl('cartera_administracion_general_grupo_detalle', array('id' => $arRegistro->getCodigoGrupoPk())));
             }
         }
 
-        return $this->render('perfil/index.html.twig', [
+        return $this->render('usuario/perfil/index.html.twig', [
             'form' => $form->createView(),
             'arPerfil' => $arPerfil
         ]);

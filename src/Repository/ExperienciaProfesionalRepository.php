@@ -25,7 +25,8 @@ class ExperienciaProfesionalRepository extends ServiceEntityRepository
     public function lista(): array
     {
         return $this->createQueryBuilder('e')
-            ->select('e.compania')
+            ->select('e.id')
+            ->addSelect('e.compania')
             ->addSelect('e.estadoActivo')
             ->addSelect('e.fechaDesde')
             ->addSelect('e.fechaHasta')
