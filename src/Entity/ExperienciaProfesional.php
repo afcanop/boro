@@ -15,7 +15,7 @@ class ExperienciaProfesional
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $compañia = null;
+    private ?string $compania = null;
 
     #[ORM\Column(length: 255)]
     private ?string $descripcionCargo = null;
@@ -34,29 +34,35 @@ class ExperienciaProfesional
         return $this->id;
     }
 
-    public function getCompañia(): ?string
+    public function getcompania(): ?string
     {
-        return $this->compañia;
+        return $this->compania;
     }
 
-    public function setCompañia(string $compañia): self
+    public function setcompania(string $compania): self
     {
-        $this->compañia = $compañia;
+        $this->compania = $compania;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescripcionCargo(): ?string
     {
         return $this->descripcionCargo;
     }
 
-    public function setDescripcionCargo(string $descripcionCargo): self
+    /**
+     * @param string|null $descripcionCargo
+     */
+    public function setDescripcionCargo(?string $descripcionCargo): void
     {
-        $this->$descripcionCargo = $descripcionCargo;
-
-        return $this;
+        $this->descripcionCargo = $descripcionCargo;
     }
+
+
 
     public function isEstadoActivo(): ?bool
     {

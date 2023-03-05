@@ -21,38 +21,20 @@ class ExperienciaProfesionalRepository extends ServiceEntityRepository
         parent::__construct($registry, ExperienciaProfesional::class);
     }
 
-    public function save(ExperienciaProfesional $entity, bool $flush = false): void
+
+    public function lista(): array
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->createQueryBuilder('e')
+            ->select('e.compania')
+            ->addSelect('e.estadoActivo')
+            ->addSelect('e.fechaDesde')
+            ->addSelect('e.fechaHasta')
+            ->addSelect('e.descripcionCargo')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
-
-    public function remove(ExperienciaProfesional $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-//    /**
-//     * @return ExperienciaProfesional[] Returns an array of ExperienciaProfesional objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
 //    public function findOneBySomeField($value): ?ExperienciaProfesional
 //    {
