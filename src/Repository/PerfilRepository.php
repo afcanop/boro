@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Estudio;
 use App\Entity\ExperienciaProfesional;
 use App\Entity\Perfil;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -30,10 +31,12 @@ class PerfilRepository extends ServiceEntityRepository
 
 
         $arExperienciaProfecionales = $this->_em->getRepository(ExperienciaProfesional::class)->lista();
+        $arEstudios = $this->_em->getRepository(Estudio::class)->lista();
 
         return (object)[
             'arPerfil' => (object)$arPerfil,
-            'arExperienciaProfecionales' => $arExperienciaProfecionales
+            'arExperienciaProfecionales' => $arExperienciaProfecionales,
+            'arEstudios' => $arEstudios
         ];
 
 

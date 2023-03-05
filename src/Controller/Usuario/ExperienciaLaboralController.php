@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExperienciaLaboralController extends AbstractController
 {
-    #[Route('/usuario/perfil/experiencialaboral', name: 'usuario_perfil_experiencia_laboral_lista')]
+    #[Route('/usuario/perfil/experiencialaboral/lista', name: 'usuario_perfil_experiencialaboral_lista')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
 
@@ -37,7 +37,7 @@ class ExperienciaLaboralController extends AbstractController
         ]);
     }
 
-    #[Route('/usuario/perfil/experiencialaboral/nuevo/{codigoExperienciaLaboral}', name: 'usuario_perfil_experiencia_laboral_nuevo')]
+    #[Route('/usuario/perfil/experiencialaboral/nuevo/{codigoExperienciaLaboral}', name: 'usuario_perfil_experiencialaboral_nuevo')]
     public function nuevo(Request $request, EntityManagerInterface $em, $codigoExperienciaLaboral): Response
     {
         $arExperienciaProfecional = $em->getRepository(ExperienciaProfesional::class)->find($codigoExperienciaLaboral);
@@ -50,7 +50,7 @@ class ExperienciaLaboralController extends AbstractController
                 $arExperienciaProfecional = $form->getData();
                 $em->persist($arExperienciaProfecional);
                 $em->flush();
-                return $this->redirect($this->generateUrl('usuario_perfil_experiencia_laboral_lista'));
+                return $this->redirect($this->generateUrl('usuario_perfil_experiencialaboral_lista'));
             }
         }
         $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);

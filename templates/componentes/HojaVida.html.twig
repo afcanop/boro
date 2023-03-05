@@ -45,9 +45,23 @@
                         </tbody>
                     </table>
                     <h6 class="text-muted font-extrabold">Estudios</h6>
+                    <table class="table table-hover">
+                        <tbody>
+                        {% for key, arEstudio in arHojaVida.arEstudios %}
+                            <tr>
+                                <td>
+                                    <p class="mb-0">{{ arEstudio.fechaDesde |date("d-m-Y") }}
+                                        - {{ arEstudio.fechaDesde |date("d-m-Y") }}
+                                    </p>
+                                    <p class="font-semibold mb-0">{{ arEstudio.titulo }}</p>
+                                    <p class="text-justify mb-0">{{ arEstudio.institucion }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
-
-                    <h6 class="font-semibold mb-0">112.000</h6>
+{#                    <h6 class="font-semibold mb-0">112.000</h6>#}
                 </div>
             </div>
         </div>

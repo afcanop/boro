@@ -1,29 +1,28 @@
 {% extends 'bases/admin.html.twig' %}
 {% block body %}
-
     <section class="row">
         <div class="col-12 col-md-4 col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h4>Experiencia laboral</h4>
+                    <h4>Estudios</h4>
                 </div>
                 <div class="card-body px-4 py-2-5">
-                    <a href="{{ path('usuario_perfil_experiencialaboral_nuevo', {'codigoExperienciaLaboral': 0}) }}"
+                    <a href="{{ path('usuario_perfil_estudio_nuevo', {'codigoEstudio': 0}) }}"
                        class="btn btn-primary">Nuevo</a>
                     <table class="table table-hover mt-3">
                         <tbody>
                         {{ form_start(form) }}
-                        {% for arExperienciaProfecional in arExperienciaProfecionales %}
+                        {% for arEstudio in arEstudios %}
                             <tr>
                                 <td>
-                                    {{ arExperienciaProfecional.compania }}
+                                    {{ arEstudio.titulo }}
                                     <br>
-                                    {{ arExperienciaProfecional.fechaDesde |date("m-Y")  }} - {{ arExperienciaProfecional.fechaHasta  |date("m-Y")  }}
+                                    {{ arEstudio.fechaDesde |date("m-Y")  }} - {{ arEstudio.fechaHasta  |date("m-Y")  }}
                                 </td>
                                 <td class="d-flex justify-content-between">
-                                    <a class="btn btn-link" href="{{ path('usuario_perfil_experiencialaboral_nuevo', {'codigoExperienciaLaboral': arExperienciaProfecional.id}) }}"><i
+                                    <a class="btn btn-link" href="{{ path('usuario_perfil_estudio_nuevo', {'codigoEstudio': arEstudio.id}) }}"><i
                                                 class="bi bi-pencil icon"></i> </a>
-                                    <button type="submit" class="btn btn-link" name="btnEliminar" value="{{ arExperienciaProfecional.id }}"><i class="bi bi-trash3 icon"></i> </button>
+                                    <button type="submit" class="btn btn-link" name="btnEliminar" value="{{ arEstudio.id }}"><i class="bi bi-trash3 icon"></i> </button>
                                 </td>
                             </tr>
                         {% endfor %}

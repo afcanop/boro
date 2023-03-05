@@ -21,46 +21,30 @@ class EstudioRepository extends ServiceEntityRepository
         parent::__construct($registry, Estudio::class);
     }
 
-    public function save(Estudio $entity, bool $flush = false): void
+    public function lista(): array
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->createQueryBuilder('e')
+            ->select('e.id')
+            ->addSelect('e.nombre')
+            ->addSelect('e.estadoTerminado')
+            ->addSelect('e.fechaDesde')
+            ->addSelect('e.fechaHasta')
+            ->addSelect('e.titulo')
+            ->addSelect('e.institucion')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
-    public function remove(Estudio $entity, bool $flush = false): void
+    public function eliminar($codigoEstudio)
     {
-        $this->getEntityManager()->remove($entity);
+        if ($codigoEstudio) {
+            $arEstudio = $this->_em->getRepository(Estudio::class)->find($codigoEstudio);
+            if ($arEstudio){
+                $this->_em->remove($arEstudio);
+                $this->_em->flush();
+            }
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return Estudio[] Returns an array of Estudio objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Estudio
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

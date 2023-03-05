@@ -42,7 +42,24 @@
         </header>
         <div class="d-flex justify-content-between">
             <div class="page-heading">
-                <h3>Profile Statistics</h3>
+                {% set arrRuta = app.request.attributes.get('_route')|split('_') %}
+                {% if  arrRuta.1 is defined %}
+                    <h3>{{ arrRuta.1 | capitalize }}</h3>
+                {% endif %}
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        {% if  arrRuta.1 is defined %}
+                            <li class="breadcrumb-item"><a href="{{ path('inicio') }}">{{ arrRuta.1 | capitalize }}</a></li>
+                        {% endif %}
+                        {% if  arrRuta.2 is defined %}
+                            <li class="breadcrumb-item"><a href="{{ path('inicio') }}">{{ arrRuta.2 | capitalize }}</a></li>
+                        {% endif %}
+                        {% if  arrRuta.3 is defined %}
+                            <li class="breadcrumb-item"><a href="{{ path('inicio') }}">{{ arrRuta.3 | capitalize }}</a></li>
+                        {% endif %}
+                    </ol>
+                </nav>
+
             </div>
             <div class="header-top-right">
 

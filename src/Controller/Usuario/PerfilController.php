@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PerfilController extends AbstractController
 {
-    #[Route('/usuario/miperfil', name: 'usuario_mi_perfil')]
+    #[Route('/usuario/perfil/lista', name: 'usuario_perfil_lista')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $arPerfil = $em->getRepository(Perfil::class)->find(1);
