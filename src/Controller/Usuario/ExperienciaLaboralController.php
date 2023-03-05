@@ -4,10 +4,10 @@ namespace App\Controller\Usuario;
 
 use App\Entity\ExperienciaProfesional;
 use App\Entity\Perfil;
-use App\Form\PerfilType;
 use App\Form\Usuario\ExperienciaLaboralType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +18,23 @@ class ExperienciaLaboralController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
 
+        $form = $this->createFormBuilder()
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($request->request->get('btnEliminar')) {
+                $codigo = $request->request->get('btnEliminar');
+                $em->getRepository(ExperienciaProfesional::class)->eliminar($codigo);
+            }
+        }
         $arPerfil = $em->getRepository(Perfil::class)->find(1);
         $arExperienciaProfecionales = $em->getRepository(ExperienciaProfesional::class)->Lista();
 
         return $this->render('usuario/experiencialaboral/lista.html.twig', [
             'arPerfil' => $arPerfil,
-            'arExperienciaProfecionales' => $arExperienciaProfecionales
+            'arExperienciaProfecionales' => $arExperienciaProfecionales,
+            'form' => $form->createView(),
+
         ]);
     }
 

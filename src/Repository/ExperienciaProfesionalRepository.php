@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ExperienciaProfesional;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,7 +22,6 @@ class ExperienciaProfesionalRepository extends ServiceEntityRepository
         parent::__construct($registry, ExperienciaProfesional::class);
     }
 
-
     public function lista(): array
     {
         return $this->createQueryBuilder('e')
@@ -33,17 +33,19 @@ class ExperienciaProfesionalRepository extends ServiceEntityRepository
             ->addSelect('e.descripcionCargo')
             ->orderBy('e.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-//    public function findOneBySomeField($value): ?ExperienciaProfesional
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function eliminar($codigoExperienciaLaboral)
+    {
+        if ($codigoExperienciaLaboral) {
+            $arExperienciaLaboral = $this->_em->getRepository(ExperienciaProfesional::class)->find($codigoExperienciaLaboral);
+            if ($arExperienciaLaboral){
+                $this->_em->remove($arExperienciaLaboral);
+                $this->_em->flush();
+            }
+
+        }
+    }
+
 }
