@@ -38,6 +38,9 @@ class Perfil
     #[ORM\Column(length: 255)]
     private ?string $correo = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $codigoUsuarioFk = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Perfil
     public function setCorreo(string $correo): self
     {
         $this->correo = $correo;
+
+        return $this;
+    }
+
+    public function getCodigoUsuarioFk(): ?string
+    {
+        return $this->codigoUsuarioFk;
+    }
+
+    public function setCodigoUsuarioFk(string $codigoUsuarioFk): self
+    {
+        $this->codigoUsuarioFk = $codigoUsuarioFk;
 
         return $this;
     }

@@ -25,13 +25,14 @@ class PerfilRepository extends ServiceEntityRepository
             ->addSelect('e.apellido2')
             ->addSelect('e.correo')
             ->orderBy('e.id', 'ASC')
-            ->where("e.id = {$codigoUsuario}")
+            ->where("e.codigoUsuarioFk = '{$codigoUsuario}'")
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
 
 
         $arExperienciaProfecionales = $this->_em->getRepository(ExperienciaProfesional::class)->lista();
         $arEstudios = $this->_em->getRepository(Estudio::class)->lista();
+
 
         return (object)[
             'arPerfil' => (object)$arPerfil,

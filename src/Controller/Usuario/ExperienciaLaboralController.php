@@ -27,7 +27,7 @@ class ExperienciaLaboralController extends AbstractController
                 $em->getRepository(ExperienciaProfesional::class)->eliminar($codigo);
             }
         }
-        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida($this->getUser()->getEmail());
         $arExperienciaProfecionales = $em->getRepository(ExperienciaProfesional::class)->Lista();
 
         return $this->render('usuario/experiencialaboral/lista.html.twig', [
@@ -48,6 +48,7 @@ class ExperienciaLaboralController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('btnGuardar')->isClicked()) {
                 $arExperienciaProfecional = $form->getData();
+                $arExperienciaProfecional->setCodigoUsuarioFk($this->getUser()->getEmail());
                 $em->persist($arExperienciaProfecional);
                 $em->flush();
                 return $this->redirect($this->generateUrl('usuario_perfil_experiencialaboral_lista'));

@@ -15,19 +15,22 @@ class PerfilController extends AbstractController
     #[Route('/usuario/perfil/lista', name: 'usuario_perfil_lista')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
-        $arPerfil = $em->getRepository(Perfil::class)->find(1);
+        $arPerfil = $em->getRepository(Perfil::class)->findOneBy(['codigoUsuarioFk'=>$this->getUser()->getEmail()]);
 
         $form = $this->createForm(PerfilType::class, $arPerfil);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('btnGuardar')->isClicked()) {
                 $arPerfil = $form->getData();
+                $arPerfil->setCodigoUsuarioFk($this->getUser()->getEmail());
                 $em->persist($arPerfil);
                 $em->flush();
+                return $this->redirect($this->generateUrl('usuario_perfil_lista'));
             }
         }
 
-        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida($this->getUser()->getEmail());
+
 
         return $this->render('usuario/perfil/index.html.twig', [
             'form' => $form->createView(),

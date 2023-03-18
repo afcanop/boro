@@ -29,6 +29,9 @@ class ExperienciaProfesional
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fechaHasta = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $codigoUsuarioFk = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class ExperienciaProfesional
     public function setFechaHasta(\DateTimeInterface $fechaHasta): self
     {
         $this->fechaHasta = $fechaHasta;
+
+        return $this;
+    }
+
+    public function getCodigoUsuarioFk(): ?string
+    {
+        return $this->codigoUsuarioFk;
+    }
+
+    public function setCodigoUsuarioFk(string $codigoUsuarioFk): self
+    {
+        $this->codigoUsuarioFk = $codigoUsuarioFk;
 
         return $this;
     }

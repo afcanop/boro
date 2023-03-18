@@ -52,7 +52,7 @@ class EstudioController  extends AbstractController
                 return $this->redirect($this->generateUrl('usuario_perfil_estudio_lista'));
             }
         }
-        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida($this->getUser()->getEmail());
 
         return $this->render('usuario/estudio/nuevo.html.twig', [
             'form' => $form->createView(),
