@@ -41,6 +41,12 @@ class Perfil
     #[ORM\Column(length: 255)]
     private ?string $codigoUsuarioFk = null;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $sexo = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $genero = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +156,36 @@ class Perfil
     public function setCodigoUsuarioFk(string $codigoUsuarioFk): self
     {
         $this->codigoUsuarioFk = $codigoUsuarioFk;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSexo(): ?string
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * @param string|null $sexo
+     */
+    public function setSexo(?string $sexo): void
+    {
+        $this->sexo = $sexo;
+    }
+
+
+
+    public function getGenero(): ?string
+    {
+        return $this->genero;
+    }
+
+    public function setGenero(?string $genero): self
+    {
+        $this->genero = $genero;
 
         return $this;
     }

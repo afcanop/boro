@@ -1,0 +1,127 @@
+{% extends 'bases/admin.html.twig' %}
+{% block stylesheets %}
+    <style>
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [type=radio]:checked + img {
+            outline: 2px solid #435ebe;
+        }
+
+        label img {
+            height: 80px;
+            width: 80px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <section class="row">
+        <div class="col-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Datos personales </h1>
+                </div>
+                <div class="card-body px-4 py-2-5">
+
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    {{ form_errors(form) }}
+
+                    <div class="row">
+                        {{ form_label(form.genero) }}
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label>
+                                <input type="radio" name="genero" onclick="selectGenero()"
+                                       value="Masculino" {{ arPerfil.genero == 'Masculino' ?   'checked' : "" }} >
+                                <img src="https://cdn-icons-png.flaticon.com/512/2940/2940654.png" alt="Masculino">
+                                <p>Masculino</p>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="genero" onclick="selectGenero()"
+                                       value="Femenino" {{ arPerfil.genero == 'Femenino' ?   'checked' : "" }}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2293/2293793.png" alt="Option 2">
+                                <p>Femenino</p>
+
+                            </label>
+
+
+                            <label>
+                                <input type="radio" name="genero" onclick="selectGenero()"
+                                       value="Otro"{{ arPerfil.genero == 'Otro' ?   'checked' : "" }}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4624/4624812.png" alt="OtroGenero">
+                                <p>Otro</p>
+                            </label>
+                        </div>
+                        {{ form_widget(form.genero) }}
+
+
+
+                        {{ form_label(form.sexo) }}
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label>
+                                <input type="radio" name="sexo" onclick="selectSexo()"
+                                       value="Hombre" {{ arPerfil.sexo == 'Hombre' ?   'checked' : "" }} >
+                                <img src="https://cdn-icons-png.flaticon.com/512/2940/2940654.png" alt="Masculino">
+                                <p>Hombre</p>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="sexo" onclick="selectSexo()"
+                                       value="Mujer" {{ arPerfil.sexo == 'Mujer' ?   'checked' : "" }}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2293/2293793.png" alt="Option 2">
+                                <p>Mujer</p>
+                            </label>
+
+
+                            <label>
+                                <input type="radio" name="sexo" onclick="selectSexo()"
+                                       value="Desconocido"{{ arPerfil.genero == 'desconocido' ?   'checked' : "" }}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3113/3113095.png" alt="desconocido">
+                                <p>Prefiero no decir</p>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="sexo" onclick="selectSexo()"
+                                       value="Otro"{{ arPerfil.sexo == 'Otro' ?   'checked' : "" }}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4624/4624812.png" alt="OtroGenero">
+                                <p>Otro</p>
+                            </label>
+                        </div>
+
+
+                        {{ form_widget(form.sexo) }}
+
+                        {{ form_row(form.btnGuardar) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        {{ include('componentes/HojaVida.html.twig', {arHojaVida: arHojaVida}) }}
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        function selectGenero() {
+            document.querySelector('#datos_personales_genero').value = document.querySelector('input[name="genero"]:checked').value;
+        }
+
+        function selectSexo() {
+            document.querySelector('#datos_personales_sexo').value = document.querySelector('input[name="sexo"]:checked').value;
+        }
+
+
+    </script>
+
+{% endblock %}
