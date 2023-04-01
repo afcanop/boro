@@ -26,7 +26,8 @@ class EstudioController  extends AbstractController
                 $em->getRepository(Estudio::class)->eliminar($codigo);
             }
         }
-        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida(1);
+
+        $arHojaVida = $em->getRepository(Perfil::class)->hojaVida($this->getUser()->getEmail());
         $arEstudios = $em->getRepository(Estudio::class)->Lista();
 
         return $this->render('usuario/estudio/lista.html.twig', [

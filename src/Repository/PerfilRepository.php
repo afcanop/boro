@@ -27,6 +27,8 @@ class PerfilRepository extends ServiceEntityRepository
             ->addSelect('e.sexo')
             ->addSelect('e.genero')
             ->addSelect('e.numeroIdentificacion')
+            ->addSelect('ti.nombre as tipoIdentificacionNombre')
+            ->leftJoin( 'e.tipoIdentificacionRel', 'ti')
             ->orderBy('e.id', 'ASC')
             ->where("e.codigoUsuarioFk = '{$codigoUsuario}'")
             ->getQuery()

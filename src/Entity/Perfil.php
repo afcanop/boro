@@ -47,6 +47,15 @@ class Perfil
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $genero = null;
 
+    #[ORM\Column]
+    private ?int $tipoIdentificacionFk = null;
+
+    #[ORM\ManyToOne(targetEntity: TipoIdentificacion::class, inversedBy: 'tipoIdentificacionPerfil')]
+    #[ORM\JoinColumn(name: 'tipoIdentificacionFk', referencedColumnName: 'id')]
+    private $tipoIdentificacionRel;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -176,8 +185,6 @@ class Perfil
         $this->sexo = $sexo;
     }
 
-
-
     public function getGenero(): ?string
     {
         return $this->genero;
@@ -189,4 +196,34 @@ class Perfil
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTipoIdentificacionRel()
+    {
+        return $this->tipoIdentificacionRel;
+    }
+
+    /**
+     * @param mixed $tipoIdentificacionRel
+     */
+    public function setTipoIdentificacionRel($tipoIdentificacionRel): void
+    {
+        $this->tipoIdentificacionRel = $tipoIdentificacionRel;
+    }
+
+    public function getTipoIdentificacionFk(): ?int
+    {
+        return $this->tipoIdentificacionFk;
+    }
+
+    public function setTipoIdentificacionFk(int $tipoIdentificacionFk): self
+    {
+        $this->tipoIdentificacionFk = $tipoIdentificacionFk;
+
+        return $this;
+    }
+
+
 }
